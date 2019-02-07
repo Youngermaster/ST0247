@@ -1,7 +1,8 @@
-import 'dart:math';
+import 'shuffle.dart';
 
 main() {
-  _coreNumberFourteen(1);
+  _coreNumberFourteen(5);
+
 }
 
 /**
@@ -27,7 +28,7 @@ List<int> firstNineNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 _coreNumberFourteen(int numberOfSolutions) {
   int counter = 0;
   while (counter < numberOfSolutions) {
-    _shuffle(firstNineNumbers);
+    shuffle(firstNineNumbers);
     _assignValuesToSector(sectorNumberOne, firstNineNumbers[0], firstNineNumbers[1], firstNineNumbers[2]);
     _assignValuesToSector(sectorNumberTwo, firstNineNumbers[2], firstNineNumbers[3], firstNineNumbers[4]);
     _assignValuesToSector(sectorNumberThree, firstNineNumbers[2], firstNineNumbers[5], firstNineNumbers[6]);
@@ -41,35 +42,16 @@ _coreNumberFourteen(int numberOfSolutions) {
     if (_checkFourteenSum(sectorNumberFour) == false)
       continue;
 
-    print(firstNineNumbers);
+    _printListFormatted();
     counter++;
   }
-}
-
-/**
- * This method will shuffle a list.
- * returns a List
- */
-_shuffle(List list) {
-  var random = Random();
-
-  // Go through all elements.
-  for (var iterator = (list.length - 1); iterator > 0; iterator--) {
-    // Pick a pseudo random number according to the list length.
-    var randomNumber = random.nextInt(iterator + 1);
-
-    var temporalAuxiliaryNumber = list[iterator];
-    list[iterator] = list[randomNumber];
-    list[randomNumber] = temporalAuxiliaryNumber;
-  }
-  return list;
 }
 
 /**
  * This method will check if the sum of the elements of the list is 14.
  * returns a bool.
  */
-_checkFourteenSum(List<int> list) => list[0] + list[1] + list[2] == 14 ? true : false;
+_checkFourteenSum(List<int> list) => list.reduce((a, b) => a + b) == 14 ? true : false;
 
 /**
  * This method will assign three values to a sector (list).
@@ -86,5 +68,11 @@ _assignValuesToSector(List<int> sector, int value1, int value2, int value3) {
  * returns void.
  */
 _printListFormatted() {
-  
+  print("_" * 11);
+  print("| ${firstNineNumbers[0]}      ${firstNineNumbers[4]} |");
+  print("|  ${firstNineNumbers[1]}   ${firstNineNumbers[3]}   |");
+  print("|    ${firstNineNumbers[2]}     |");
+  print("|    ${firstNineNumbers[5]}     |");
+  print("| ${firstNineNumbers[7]}  ${firstNineNumbers[6]}  ${firstNineNumbers[8]}  |");
+  print("_" * 11);
 }
