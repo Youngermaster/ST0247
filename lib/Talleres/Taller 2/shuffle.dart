@@ -5,7 +5,7 @@ import 'dart:math';
  * returns a List
  */
 shuffle(List list) {
-  var random = Random();
+  var random = Random();  // This
 
   // Go through all elements.
   for (var iterator = (list.length - 1); iterator > 0; iterator--) {

@@ -1,7 +1,8 @@
 import 'dart:io';
 
 /**
- *
+ * It gonna read a variable and if the variable have tabulations or line
+ * spaces will trim they.
  * returns a double.
  */
 readDouble(String message) {
@@ -10,9 +11,9 @@ readDouble(String message) {
   return double.parse(read);
 }
 
-
 /**
- *
+ * It gonna read a variable and if the variable have tabulations or line
+ * spaces will trim they.
  * returns a integer.
  */
 readInteger(String message) {
