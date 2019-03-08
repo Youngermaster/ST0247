@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <string>
+#include <map>
 
 using namespace std;
 
@@ -14,6 +15,7 @@ public:
     int codigo_BPIN;
     string nombre_proyecto;
     int codigo_comuna;
+    map <int, int> codigo_comuna_cantidad_comuna;
     string nombre_comuna;
     float inversion;
     string ano;

@@ -4,7 +4,7 @@
 using namespace std;
 
 Row::Row(int c_d, string n_d, int t_i, int c_BPIN, string n_p,
-        int c_c, string n_c, float i, string ano)
+         int c_c, string n_c, float i, string ano)
 {
   codigo_dependencia = c_d;
   nombre_dependencia = n_d;
