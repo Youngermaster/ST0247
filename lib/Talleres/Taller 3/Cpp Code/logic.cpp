@@ -7,6 +7,7 @@ Logic::Logic()
 
 void Logic::core()
 {
+    /**
     int codigo_dependencia;
     string nombre_dependencia;
     int tipo_inversion;
@@ -40,15 +41,12 @@ void Logic::core()
         getline(ip, inversion, ';');
         getline(ip, ano, ';');
         
+        counter++;
     }
 
     
 
     ip.close();
-}
-
-int main(int argc, char const *argv[])
-{
-    core();
-    return 0;
+    */
+   cout << "GG it works"<<endl;
 }

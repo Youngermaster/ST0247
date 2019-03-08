@@ -8,7 +8,7 @@ using namespace std;
 
 class Row
 {
-public:
+private:
     int codigo_dependencia;
     string nombre_dependencia;
     int tipo_inversion;
@@ -19,7 +19,7 @@ public:
     string nombre_comuna;
     float inversion;
     string ano;
-private:
+public:
     Row(int c_d, string n_d, int t_i, int c_BPIN, string n_p,
         int c_c, string n_c, float i, string ano);
     ~Row();
