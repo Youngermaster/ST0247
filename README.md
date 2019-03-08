@@ -1,4 +1,3 @@
-A sample command-line application.
+# ST0247
 
-Created from templates made available by Stagehand under a BSD-style
-[license](https://github.com/dart-lang/stagehand/blob/master/LICENSE).
+This is the repository for the subject Estructuras de Datos y Algoritmos II
