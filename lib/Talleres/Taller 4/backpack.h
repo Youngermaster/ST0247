@@ -1,22 +1,21 @@
 #pragma once
 
-#include <iostream>
-#include <string>
+#include "product.h"
 #include <vector>
-#include "row.h"
-
-using namespace std;
 
 class BackPack
 {
 private:
     string name;
     int limit;
-    vector <Row> rows;
+    vector <Product> products;
 public:
-    BackPack(string nam, int lim);
+    BackPack();
+    BackPack(string newName, int newLimit);
     ~BackPack();
-    string get_name();
-    int get_limit();
-    void add_row();
+    string get_name() const;
+    int get_limit() const;
+    int get_total_products_price() const;
+    vector<Product> get_products() const;
+    void add_product(Product);
 };

@@ -1,0 +1,12 @@
+CXXFLAGS=
+
+taller4: main.o app.o backpack.o logic.o product.o
+	$(CXX) -o $@ $^
+
+
+
+
+
+clean:
+	rm -f *.o
+	rm -f taller4
