@@ -15,11 +15,12 @@ private:
     BackPack toiletries;
     BackPack oilsAndSauces;
     BackPack vegetables;
+    BackPack optional;
     vector <Product> finalSolution;
 public:
     Logic();
     ~Logic();
-    void read_file();
+    void read_file(string);
     void core();
     void brute_force(vector<Product> , int);
 };

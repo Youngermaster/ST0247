@@ -28,7 +28,7 @@ int BackPack::get_total_products_price() const
 
 vector <Product> BackPack::get_products() const { return products; }
 
-void BackPack::add_product(Product newProduct) { products.push_back(newProduct); }
+void BackPack::add_product(Product& newProduct) { products.push_back(newProduct); }
 
 void BackPack::set_name(string newName) { name = newName; }
 

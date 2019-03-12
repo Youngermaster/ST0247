@@ -19,7 +19,7 @@ public:
     int get_obligatory_elements() const;
     int get_total_products_price() const;
     vector<Product> get_products() const;
-    void add_product(Product);
+    void add_product(Product&);
     void set_name(string);
     void set_limit(int);
     void set_obligatory_elements(int);
