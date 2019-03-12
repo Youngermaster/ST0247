@@ -14,6 +14,9 @@ public:
     string get_category() const;
     string get_name() const;
     int get_price() const;
+    void set_category(string);
+    void set_name(string);
+    void set_price(int);
 private:
     string category;
     string name;

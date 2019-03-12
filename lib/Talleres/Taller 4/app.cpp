@@ -5,10 +5,7 @@ App::App()
     megaCore();
 }
 
-App::~App()
-{
-    
-}
+App::~App() { }
 
 void App::megaCore()
 {
