@@ -27,6 +27,14 @@ Logic::~Logic() { }
 
 void Logic::core()
 {
+    read_file("listacsv.csv");
+
+    
+    for(int iterator = 0; iterator < proteins.get_products.size(); iterator++)
+    {
+        cout << "What's up?" << endl;
+    }
+    
 }
 
 void Logic::read_file(string path)
@@ -51,20 +59,24 @@ void Logic::read_file(string path)
         getline(ip, name, ';');
         getline(ip, price, '\n');
 
+
+        int newPrice = stoi(price);
+        Product newProduct(category, name, newPrice);
+
         if (category == "Proteina")
-            proteins.add_product(Product(category, name, price));
+            proteins.add_product(newProduct);
         else if (category == "Harina")
-            flour.add_product(Product(category, name, price));
+            flour.add_product(newProduct);
         else if (category == "Granos")
-            grain.add_product(Product(category, name, price));
+            grain.add_product(newProduct);
         else if (category == "Aseo")
-            toiletries.add_product(Product(category, name, price));
+            toiletries.add_product(newProduct);
         else if (category == "Aceite y salsa")
-            oilsAndSauces.add_product(Product(category, name, price));
+            oilsAndSauces.add_product(newProduct);
         else if (category == "Vegetales")
-            vegetables.add_product(Product(category, name, price));
+            vegetables.add_product(newProduct);
         else
-            optional.add_product(Product(category, name, price));
+            optional.add_product(newProduct);
         
     }
 
