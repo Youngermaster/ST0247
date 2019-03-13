@@ -21,19 +21,21 @@ Logic::Logic()
     vegetables.set_limit(50000);
     vegetables.set_obligatory_elements(12);
     optional.set_name("Optional");
+
+    core();
 }
 
 Logic::~Logic() { }
 
 void Logic::core()
 {
-    read_file("listacsv.csv");
+    //read_file("listacsv.csv");
+    vector <Product> auxiliar = proteins.get_products();
 
-    
-    for(int iterator = 0; iterator < proteins.get_products.size(); iterator++)
-    {
+
+    for(int iterator = 0; iterator < auxiliar.size(); iterator++)
         cout << "What's up?" << endl;
-    }
+    
     
 }
 
