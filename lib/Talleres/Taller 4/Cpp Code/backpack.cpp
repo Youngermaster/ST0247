@@ -6,9 +6,9 @@ BackPack::~BackPack() { }
 
 BackPack::BackPack(string newName, int newLimit, int newObligatoryElements)
 {
-    name = newName;
-    limit = newLimit;
-    obligatoryElements = newObligatoryElements;
+    this->name = newName;
+    this->limit = newLimit;
+    this->obligatoryElements = newObligatoryElements;
 }
 
 string BackPack::get_name() const { return name; }

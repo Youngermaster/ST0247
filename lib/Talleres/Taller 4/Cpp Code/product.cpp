@@ -6,9 +6,9 @@ Product::~Product() { }
 
 Product::Product(string newCategory, string newName, int newPrice)
 {
-    category = newCategory;
-    name = newName;
-    price = newPrice;
+    this->category = newCategory;
+    this->name = newName;
+    this->price = newPrice;
 }
 
 string Product::get_category() const { return category; }

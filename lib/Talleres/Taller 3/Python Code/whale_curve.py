@@ -14,7 +14,7 @@ def leerCSV(pathArchivo, datos):
             #nombreProyecto = linea[4]
             #comuna = linea[5]
             #inversion = linea[7]
-            #if contadorReg < 6637: ##6638
+            #if contadorReg < 6637: #6637
             datos.append(linea[5])
             #elif contadorReg >= 6637:   
                 #datos2.append(linea[5])

@@ -2,25 +2,25 @@
 
 Logic::Logic() 
 {
-    proteins.set_name("Proteins");
-    proteins.set_limit(50000);
-    proteins.set_obligatory_elements(8);
-    flour.set_name("Flour");
-    flour.set_limit(50000);
-    flour.set_obligatory_elements(10);
-    grain.set_name("Grain");
-    grain.set_limit(50000);
-    grain.set_obligatory_elements(3);
-    toiletries.set_name("Toiletries");
-    toiletries.set_limit(50000);
-    toiletries.set_obligatory_elements(4);
-    oilsAndSauces.set_name("Oils and sauces");
-    oilsAndSauces.set_limit(50000);
-    oilsAndSauces.set_obligatory_elements(3);
-    vegetables.set_name("Vegetables");
-    vegetables.set_limit(50000);
-    vegetables.set_obligatory_elements(12);
-    optional.set_name("Optional");
+    this->proteins.set_name("Proteins");
+    this->proteins.set_limit(50000);
+    this->proteins.set_obligatory_elements(8);
+    this->flour.set_name("Flour");
+    this->flour.set_limit(50000);
+    this->flour.set_obligatory_elements(10);
+    this->grain.set_name("Grain");
+    this->grain.set_limit(50000);
+    this->grain.set_obligatory_elements(3);
+    this->toiletries.set_name("Toiletries");
+    this->toiletries.set_limit(50000);
+    this->toiletries.set_obligatory_elements(4);
+    this->oilsAndSauces.set_name("Oils and sauces");
+    this->oilsAndSauces.set_limit(50000);
+    this->oilsAndSauces.set_obligatory_elements(3);
+    this->vegetables.set_name("Vegetables");
+    this->vegetables.set_limit(50000);
+    this->vegetables.set_obligatory_elements(12);
+    this->optional.set_name("Optional");
 
     core();
 }
@@ -29,7 +29,7 @@ Logic::~Logic() { }
 
 void Logic::core()
 {
-    //read_file("listacsv.csv");
+    read_file("listacsv.csv");
     vector <Product> auxiliar = proteins.get_products();
 
 
@@ -79,7 +79,6 @@ void Logic::read_file(string path)
             vegetables.add_product(newProduct);
         else
             optional.add_product(newProduct);
-        
     }
 
     ip.close();

@@ -19,5 +19,5 @@ public:
     ~Logic();
     void read_file(string);
     void core();
-    void brute_force(vector<Product> , int);
+    //void voraice(vec)
 };
