@@ -202,6 +202,7 @@ def second_menu():
     print("\n -> La cuenta es: ${}".format(second_bill))
     print("\n\tGracias por su compra :D")
 
+
 def core():
     read_csv('E:\GIT\Github Projects\ST0247\lib\Talleres\Taller 4\Python Code\listacsv.csv')
     assign_limit_by_elements_first_budget(proteins, 8)
@@ -223,4 +224,3 @@ def core():
     
 if __name__ == "__main__":
     core()
-
