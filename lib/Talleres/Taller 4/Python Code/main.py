@@ -204,7 +204,7 @@ def second_menu():
 
 
 def core():
-    read_csv('E:\GIT\Github Projects\ST0247\lib\Talleres\Taller 4\Python Code\listacsv.csv')
+    read_csv('listacsv.csv')
     assign_limit_by_elements_first_budget(proteins, 8)
     assign_limit_by_elements_first_budget(flour, 10)
     assign_limit_by_elements_first_budget(grain, 3)
