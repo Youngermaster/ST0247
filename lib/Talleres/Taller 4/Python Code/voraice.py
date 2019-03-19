@@ -5,8 +5,10 @@ FIRST_BUDGET = 300000
 SECOND_BUDGET = 200000
 
 bill = 0
+second_bill = 0
 
-solutionBackPack = []
+solution_back_pack_1 = []
+solution_back_pack_2 = []
 proteins = {}
 flour = {}
 grain = {}
@@ -55,8 +57,31 @@ def assign_limit_by_elements_first_budget(list, limit):
             iterator = 0
             continue
 
-        solutionBackPack.append(products[iterator])
+        solution_back_pack_1.append(products[iterator])
         bill += prices[iterator]
+        iterator += 1
+    
+
+def assign_limit_by_elements_second_budget(list, limit):
+    auxiliary_list = sorted(list.items(), key=operator.itemgetter(1))
+    products = []
+    prices = []
+
+    global second_bill
+
+    for iterator in range(len(auxiliary_list)):
+        products.append(auxiliary_list[iterator][0])
+        prices.append(auxiliary_list[iterator][1])
+
+    iterator = 0
+
+    while iterator < limit:
+        if iterator == len(products):
+            iterator = 0
+            continue
+
+        solution_back_pack_2.append(products[iterator])
+        second_bill += prices[iterator]
         iterator += 1
     
 
@@ -84,16 +109,58 @@ def assign_optionals_first_budget():
             iterator -= 1
             continue
 
-        solutionBackPack.append(products[iterator])
+        solution_back_pack_1.append(products[iterator])
         bill += prices[iterator]
+        iterator += 1
+
+
+def assign_optionals_second_budget():
+    auxiliary_list = sorted(optional.items(), key=operator.itemgetter(1))
+    products = []
+    prices = []
+
+    global second_bill
+
+    for iterator in range(len(auxiliary_list)):
+        products.append(auxiliary_list[iterator][0])
+        prices.append(auxiliary_list[iterator][1])
+
+    auxiliary_list = sorted(grain.items(), key=operator.itemgetter(1))
+
+    for iterator in range(len(auxiliary_list)):
+        products.append(auxiliary_list[iterator][0])
+        prices.append(auxiliary_list[iterator][1])
+
+
+    auxiliary_list = sorted(toiletries.items(), key=operator.itemgetter(1))
+
+    for iterator in range(len(auxiliary_list)):
+        products.append(auxiliary_list[iterator][0])
+        prices.append(auxiliary_list[iterator][1])
+
+
+    while second_bill <= SECOND_BUDGET:
+        if iterator < 0:
+            break
+
+        if iterator == len(products):
+            iterator = 0
+            continue
+
+        if second_bill + prices[iterator] > SECOND_BUDGET:
+            iterator -= 1
+            continue
+
+        solution_back_pack_2.append(products[iterator])
+        second_bill += prices[iterator]
         iterator += 1
 
 
 def menu():
     print("Estos son los productos que has pedido:\n")
-    for i in solutionBackPack:
+    for i in solution_back_pack_1:
         print("-{}".format(i))
-    print("\n -> La cuenta es: {}".format(bill))
+    print("\n -> La cuenta es: ${}".format(bill))
     print("\n\tOh oh.")
 
     print("""                  xOOOOOOOkdoc;                                                           ,,:cloo:'
@@ -128,6 +195,12 @@ def menu():
     print("\n\tEl sistema de tarjeta no funciona :'(")
     
 
+def second_menu():
+    print("Estos son los nuevos productos que has pedido:\n")
+    for i in solution_back_pack_2:
+        print("-{}".format(i))
+    print("\n -> La cuenta es: ${}".format(second_bill))
+    print("\n\tGracias por su compra :D")
 
 def core():
     read_csv('E:\GIT\Github Projects\ST0247\lib\Talleres\Taller 4\Python Code\listacsv.csv')
@@ -139,6 +212,14 @@ def core():
     assign_limit_by_elements_first_budget(vegetables, 12)
     assign_optionals_first_budget()
     menu()
+    print("\n\n")
+    assign_limit_by_elements_second_budget(proteins, 8)
+    assign_limit_by_elements_second_budget(vegetables, 4)
+    assign_limit_by_elements_second_budget(flour, 2)
+    assign_limit_by_elements_second_budget(oilsAndSauces, 1)
+    assign_optionals_second_budget()
+    second_menu()
+
     
 if __name__ == "__main__":
     core()
