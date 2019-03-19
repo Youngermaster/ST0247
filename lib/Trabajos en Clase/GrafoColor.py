@@ -27,7 +27,7 @@ def validarColor(nodo, color):
     for arista in aristas.get(nodo): 
         color_de_arista = colores_de_nodos.get(arista)
         if color_de_arista == color:
-            print("{} ya tiene color.".format(arista))
+            #print("{} ya tiene color.".format(arista))
             return False
 
     return True
