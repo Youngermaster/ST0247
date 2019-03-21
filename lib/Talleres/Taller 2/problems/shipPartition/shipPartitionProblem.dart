@@ -1,7 +1,13 @@
-import 'scanner.dart';
+import '../../common/scanner.dart';
+import '../../problem.dart';
 
-main() {
-  shipPartitionProblemCore();
+class CargoShip implements Problem {
+
+  @override
+  bool available() => true;
+
+  @override
+  void call(args) => shipPartitionProblemCore(args[0]);
 }
 
 List _productList = List(); // This is the list of the products of the problem.
@@ -12,8 +18,8 @@ List _rightContainer = List(); // The right part of the ship container.
  * The core of the problem
  * returns void.
  */
-shipPartitionProblemCore() {
-  _addProducts(8);
+shipPartitionProblemCore(int products) {
+  _addProducts(products);
   _bruteForce(_productList);
   _printFormatted();
 }
