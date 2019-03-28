@@ -1,22 +1,11 @@
 import csv
 import operator
+from comuna import *
 
 bill = 0
 second_bill = 0
 
-solution_back_pack_1 = []
-solution_back_pack_2 = []
-proteins = {}
-flour = {}
-grain = {}
-toiletries = {}
-oilsAndSauces = {}
-vegetables = {}
-optional = {}
 
-class Comuna:
-    def __init__(self, name):
-        pass
 
 
 def read_csv(file_path):
@@ -40,16 +29,18 @@ def read_csv(file_path):
                 optional[line[1]] = int(line[2])
 
 
-
-
 def menu():
     pass
     
 
 def core():
-    read_csv('PPMedellin2017.csv')
-    menu()
+    #read_csv('PPMedellin2017.csv')
+    #menu()
     print("\n\n")
+    c = Comuna("Name")
+    c.boys = "Juan"
+    print(c.boys)
+
 
 
 if __name__ == "__main__":
