@@ -13,9 +13,12 @@ def read_csv(file_path):
         list_counter = -1
         for line in lecture:
             if line[1] == "Comuna":
+                if line[2] == "Suma Comunas":
+                    continue
                 if line[2] not in name_of_comunas:
                     list_counter += 1
-                    comunas.append(Comuna(line[2]))
+                    new_comuna = Comuna(line[2])
+                    comunas.append(new_comuna)
                     name_of_comunas.add(line[2])
                 assign_people(comunas[list_counter], line[3], line[5], 'male')
                 assign_people(comunas[list_counter], line[3], line[6], 'female')
@@ -25,6 +28,7 @@ def assign_people(comuna, age_range, people_quatity, gender):
     if age_range == ' 0-4' or age_range == ' 5-9':
         if gender == 'male':
             comuna.boys += int(people_quatity)
+
         else:
             comuna.girls += int(people_quatity)
     elif age_range == ' 10-14' or age_range == ' 15-19' or age_range == ' 20-24':
@@ -38,7 +42,7 @@ def assign_people(comuna, age_range, people_quatity, gender):
             comuna.older_men += int(people_quatity)
         else:
             comuna.older_women += int(people_quatity)
-    elif age_range == 'Total':
+    elif age_range == ' Total':
         if gender == 'male':
             comuna.men += int(people_quatity)
         else:
@@ -61,25 +65,38 @@ def menu():
     
 
 def logic():
+    x = []
+    y = []
     while True:
         print("\n\n")
         menu()
+        
+        auxiliar_comunas = comunas
+        for iterator in auxiliar_comunas:
+            iterator.difference_between_men_and_women = iterator.men - iterator.women
+        
+        auxiliar_comunas.sort(key=lambda x: x.difference_between_men_and_women, reverse=False)
+
         option = input("Digit something: ")
         if option == 'a' or option == 'A':
-            x = ["asdasdasdfjdlifjs", "adsadasd", "dsada", "4"]
-            y = [2, 4, 6, 8]
+            for iterator in auxiliar_comunas:
+                y.append(iterator.difference_between_men_and_women)
+                x.append(iterator.name)
+
             plt.plot(x, y, marker='o')
-            plt.xlabel('Comuna (mm)')
-            plt.ylabel('Periodo de retorno')
-            plt.title('GG')
+            plt.xlabel('Diferencia entre hombres y mujeres')
+            plt.ylabel('Comuna')
+            plt.title('Diferencia entre hombres y mujeres por comuna.')
             plt.show()
+            x.clear()
+            y.clear()
         elif option == 'b' or option == 'B':
             pass
         elif option == 'c' or option == 'C':
             pass
         elif option == 'd' or option == 'D':
             pass
-        else:
+        else:   
             break
 
 

@@ -7,6 +7,7 @@ class Comuna:
     _women = 0
     _older_men = 0
     _older_women = 0
+    _difference_between_men_and_women = 0
     _population = 0
 
     def __init__(self, name):
@@ -128,6 +129,19 @@ class Comuna:
     @older_women.deleter
     def older_women(self):
         del self._older_women
+
+    @property
+    def _difference_between_men_and_women(self):
+        """I'm the '__difference_between_men_and_women' property."""
+        return self.__difference_between_men_and_women
+
+    @_difference_between_men_and_women.setter
+    def _difference_between_men_and_women(self, value):
+        self.__difference_between_men_and_women = value
+
+    @_difference_between_men_and_women.deleter
+    def _difference_between_men_and_women(self):
+        del self.__difference_between_men_and_women
 
     def get_all_population():
         _population = _boys + _girls + _young_men + _young_women + _men + _women + _older_men + older_women
