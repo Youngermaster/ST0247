@@ -3,6 +3,8 @@ class Comuna:
     _girls = 0
     _young_men = 0
     _young_women = 0
+    _men = 0
+    _women = 0
     _older_men = 0
     _older_women = 0
     _population = 0
@@ -10,6 +12,19 @@ class Comuna:
     def __init__(self, name):
         self._name = name
         
+    @property
+    def name(self):
+        """I'm the '_name' property."""
+        return self._name
+
+    @name.setter
+    def name(self, value):
+        self._name = value
+
+    @name.deleter
+    def name(self):
+        del self._name
+
     @property
     def boys(self):
         """I'm the '_boys' property."""
@@ -61,6 +76,32 @@ class Comuna:
     @young_women.deleter
     def young_women(self):
         del self._young_women
+    
+    @property
+    def men(self):
+        """I'm the '_men' property."""
+        return self._men
+
+    @men.setter
+    def men(self, value):
+        self._men = value
+
+    @men.deleter
+    def men(self):
+        del self._men
+
+    @property
+    def women(self):
+        """I'm the '_women' property."""
+        return self._women
+
+    @women.setter
+    def women(self, value):
+        self._women = value
+
+    @women.deleter
+    def women(self):
+        del self._women
 
     @property
     def older_men(self):
@@ -87,3 +128,9 @@ class Comuna:
     @older_women.deleter
     def older_women(self):
         del self._older_women
+
+    def get_all_population():
+        _population = _boys + _girls + _young_men + _young_women + _men + _women + _older_men + older_women
+        return _population
+
+    # def get
