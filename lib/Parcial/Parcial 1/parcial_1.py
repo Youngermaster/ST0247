@@ -62,23 +62,22 @@ def menu():
            \n De mayor a menor para programas de educación sexual.")
     print("\n(D).Comuna según adultos mayores (personas mayores a 55 años).\
            \n De mayor amenor para programas de tercera edad.")
+    print("\n-> Seleccione una opción, si no desea ninguna opción digite cualquier cosa.\n")
     
 
 def logic():
     x = []
     y = []
+    auxiliar_comunas = comunas
     while True:
         print("\n\n")
         menu()
-        
-        auxiliar_comunas = comunas
-        for iterator in auxiliar_comunas:
-            iterator.difference_between_men_and_women = iterator.men - iterator.women
-        
-        auxiliar_comunas.sort(key=lambda x: x.difference_between_men_and_women, reverse=False)
-
-        option = input("Digit something: ")
+        option = input("Digite por favor: ")
         if option == 'a' or option == 'A':
+            for iterator in auxiliar_comunas:
+                iterator.difference_between_men_and_women = iterator.men - iterator.women
+            
+            auxiliar_comunas.sort(key=lambda x: x.difference_between_men_and_women, reverse=False)
             for iterator in auxiliar_comunas:
                 y.append(iterator.difference_between_men_and_women)
                 x.append(iterator.name)
@@ -91,11 +90,53 @@ def logic():
             x.clear()
             y.clear()
         elif option == 'b' or option == 'B':
-            pass
+            for iterator in auxiliar_comunas:
+                iterator.childs = iterator.boys + iterator.girls
+
+            auxiliar_comunas.sort(key=lambda x: x.childs, reverse=False)
+
+            for iterator in auxiliar_comunas:
+                y.append(iterator.childs)
+                x.append(iterator.name)
+
+            plt.plot(x, y, marker='o')
+            plt.xlabel('infantes')
+            plt.ylabel('Comuna')
+            plt.title('Comuna según el número de infantes.')
+            plt.show()
+            x.clear()
+            y.clear()
         elif option == 'c' or option == 'C':
-            pass
+            auxiliar_comunas.sort(key=lambda x: x.young_women, reverse=False)
+
+            for iterator in auxiliar_comunas:
+                y.append(iterator.young_women)
+                x.append(iterator.name)
+
+            plt.plot(x, y, marker='o')
+            plt.xlabel('Mujeres jovenes')
+            plt.ylabel('Comuna')
+            plt.title('Comuna según mujeres jóvenes.')
+            plt.show()
+            x.clear()
+            y.clear()
         elif option == 'd' or option == 'D':
-            pass
+            for iterator in auxiliar_comunas:
+                iterator.olds = iterator.older_men + iterator.older_women
+
+            auxiliar_comunas.sort(key=lambda x: x.olds, reverse=False)
+
+            for iterator in auxiliar_comunas:
+                y.append(iterator.olds)
+                x.append(iterator.name)
+
+            plt.plot(x, y, marker='o')
+            plt.xlabel('Aldutos mayores')
+            plt.ylabel('Comuna')
+            plt.title('Comuna según adultos mayores.')
+            plt.show()
+            x.clear()
+            y.clear()
         else:   
             break
 

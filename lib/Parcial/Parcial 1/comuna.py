@@ -8,6 +8,8 @@ class Comuna:
     _older_men = 0
     _older_women = 0
     _difference_between_men_and_women = 0
+    _childs = 0
+    _olds = 0
     _population = 0
 
     def __init__(self, name):
@@ -131,17 +133,43 @@ class Comuna:
         del self._older_women
 
     @property
-    def _difference_between_men_and_women(self):
+    def difference_between_men_and_women(self):
         """I'm the '__difference_between_men_and_women' property."""
         return self.__difference_between_men_and_women
 
-    @_difference_between_men_and_women.setter
-    def _difference_between_men_and_women(self, value):
+    @difference_between_men_and_women.setter
+    def difference_between_men_and_women(self, value):
         self.__difference_between_men_and_women = value
 
-    @_difference_between_men_and_women.deleter
-    def _difference_between_men_and_women(self):
+    @difference_between_men_and_women.deleter
+    def difference_between_men_and_women(self):
         del self.__difference_between_men_and_women
+        
+    @property
+    def childs(self):
+        """I'm the '_childs' property."""
+        return self._childs
+
+    @childs.setter
+    def childs(self, value):
+        self._childs = value
+
+    @childs.deleter
+    def childs(self):
+        del self._childs
+
+    @property
+    def olds(self):
+        """I'm the '_olds' property."""
+        return self._olds
+
+    @olds.setter
+    def olds(self, value):
+        self._olds = value
+
+    @olds.deleter
+    def olds(self):
+        del self._olds
 
     def get_all_population():
         _population = _boys + _girls + _young_men + _young_women + _men + _women + _older_men + older_women
