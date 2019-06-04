@@ -19,6 +19,6 @@ int Product::get_price() const { return price; }
 
 void Product::set_category(string newCategory) { category = newCategory; }
 
-void Product::set_name(string newName) { name = newName; }
+void Product::set_name(string newName) { this->name = newName; }
 
-void Product::set_price(int newPrice) { price = newPrice; }
+void Product::set_price(int newPrice) { this->price = newPrice; }

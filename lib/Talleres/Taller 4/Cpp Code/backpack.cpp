@@ -30,6 +30,6 @@ vector <Product> BackPack::get_products() const { return products; }
 
 void BackPack::add_product(Product newProduct) { products.push_back(newProduct); }
 
-void BackPack::set_name(string newName) { name = newName; }
+void BackPack::set_name(string newName) { this->name = newName; }
 
-void BackPack::set_limit(int newLimit) { limit = newLimit; }
+void BackPack::set_limit(int newLimit) { this->limit = newLimit; }

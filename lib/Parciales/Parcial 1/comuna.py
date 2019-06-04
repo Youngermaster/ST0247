@@ -170,9 +170,3 @@ class Comuna:
     @olds.deleter
     def olds(self):
         del self._olds
-
-    def get_all_population():
-        _population = _boys + _girls + _young_men + _young_women + _men + _women + _older_men + older_women
-        return _population
-
-    # def get
