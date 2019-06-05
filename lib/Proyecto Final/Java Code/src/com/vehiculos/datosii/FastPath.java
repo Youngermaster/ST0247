@@ -25,7 +25,7 @@ public class FastPath {
      * Complexity: Better and worse case O(n*n), where 'n' are the vehicle owners and the company.
      *
      * @param pointsNumber The company number is '1' and the vehicle owners are 'n - 1'.
-     * @return Un graph completo con la distancia mas corta entre todos los vertices.
+     * @return A complete graph with the shortest distance between all the vertices.
      *
      */
     public static AdaptedGraph readFile(int pointsNumber, float p){
@@ -38,18 +38,18 @@ public class FastPath {
             BufferedReader br = new BufferedReader(new FileReader(fileName));
             String currentlyLine = br.readLine();
 
-            for (int i = 1; i <= 3; i++) // Descarta las primeras 3 lineas
+            for (int i = 1; i <= 3; i++) // Discard the first 3 lines.
                 currentlyLine = br.readLine();
 
             currentlyLine = br.readLine();
 
-            for (int i = 1; i <= pointsNumber; i++) //Descarta los nombres y coordenadas de los vertices
+            for (int i = 1; i <= pointsNumber; i++) // Discard the names and coordinates of the vertices.
                 currentlyLine = br.readLine();
 
-            for (int i = 1; i <= 3; i++) // Descarta las siguientes 3 lineas
+            for (int i = 1; i <= 3; i++) //  Discard the first 3 lines.
                 currentlyLine = br.readLine();
 
-            while (currentlyLine != null){ // Mientras no llegue al fin del archivo. Lee la informacion de las aristas
+            while (currentlyLine != null){ // As long as it does not reach the end of the file. Read the information of the edges.
 
                 String[] partitionedChain = currentlyLine.split(" ");
 
@@ -68,30 +68,27 @@ public class FastPath {
                         Integer.parseInt(partitionedChain[2]));
 
                 currentlyLine = br.readLine();
-
             }
 
         }
         catch(IOException ioe) {
-            System.out.println("Error leyendo el archivo de entrada: " + ioe.getMessage());
+            System.out.println("Error reading the input file: " + ioe.getMessage());
         }
-
         return graph;
-
     }
 
     /**
-     * Primera parte del método merge sort el cual se implemetara para ordenar el graph, a través de los pesos de los arcos
-     * de cada sucesor con el punto "pos".
+     * First part of the merge sort method which is implemented to order the graph,
+     * through the weights of the arcs of each event with the "pos" point.
      *
-     * @param input Sucesores de un verice.
-     * @param graph graph completo con la distancia mas corta entre todos los vertices.
-     * @param pos Verice origen o referencia.
+     * @param input Successors of a vertex.
+     * @param graph complete graph with the shortest distance between all vertices.
+     * @param pos Origin vertex or reference.
      *
      */
     public static void sort(ArrayList<Integer> input, AdaptedGraph graph, int pos) {
 
-        if(input.size() < 2)  // Si es menor que 2 el tamaño no necesita ser organizado.
+        if(input.size() < 2)  // If it is less than 2 the size does not need to be organized.
             return;
 
         int mid = input.size() / 2;
@@ -99,10 +96,10 @@ public class FastPath {
         ArrayList<Integer> left = new ArrayList<>(mid);
         ArrayList<Integer> right = new ArrayList(input.size() - mid);
 
-        for(int i = 0; i < mid; i++) //copy left
+        for(int i = 0; i < mid; i++) // copy left
             left.add(i, input.get(i));
 
-        for(int i = 0; i < input.size() - mid; i++) //copy right
+        for(int i = 0; i < input.size() - mid; i++) // copy right
             right.add(i, input.get(mid+i));
 
         sort(left, graph, pos);
@@ -111,8 +108,8 @@ public class FastPath {
     }
 
     /**
-     * Segunda parte del método merge sort en el cual divide el arreglo de sucesores un dos arreglos hasta que los vaya
-     * ubicando de menor a major.
+     * Second part of the merge sort method in which the successor arrangement
+     * divides two arrangements until it is located from minor to major.
      *
      * @param a
      * @param b
@@ -125,7 +122,7 @@ public class FastPath {
 
         int i = 0, j = 0, k = 0;
 
-        while(i < a.size() && j < b.size()) { //merge back
+        while(i < a.size() && j < b.size()) { // merge back
 
             if(graph.getWeight(pos, a.get(i)) < graph.getWeight(pos, b.get(j))) { // a.get(i) < b.get(j)
                 all.set(k, a.get(i));//[k] = a[i];
@@ -139,10 +136,10 @@ public class FastPath {
 
         }
 
-        while(i < a.size())//left remaining
+        while(i < a.size()) // left remaining
             all.set(k++, a.get(i++)); //all[k++] = a[i++];
 
-        while(j < b.size()) //right remaining
+        while(j < b.size()) // right remaining
             all.set(k++, b.get(j++)); //all[k++] = b[j++];
 
     }
@@ -152,53 +149,55 @@ public class FastPath {
     }
 
     /**
-     * Método que encuentra el número minimo de carros, partiendo desde el principio de que se va a tratar de encontrar
-     * un path más corto al vertice que este más alejado de la empresa a través de otros vértices; una vez agrupado
-     * los vértice se eliminan del arreglo de los vertices de la empresa por lo que la complejidad en el peor de los
-     * casos es de O(n).
+     * Method that finds the minimum number of cars, starting from the
+     * beginning that is going to try to find a shorter path to the vertex that is
+     * further from the company through other vertices;
+     * once grouped the vertex are eliminated from the arrangement of the vertices of the company 
+     * so the complexity in the worst case is O (n).
      *
-     * @param graph graph completo con la distancia mas corta entre todos los vertices.
-     * @param vertexList Lista de ArrayList en los cual contienen cada uno de sus arcos ordenados de menor a major.
-     * @return Una lista con las listas con la minima cantidad de carros.
+     * @param graph complete graph with the shortest distance between all the vertices.
+     * @param vertexList List of ArrayList in which they contain each of their arcs ordered from least to greatest.
+     * @return A list of the lists with the minimum number of cars.
      *
      */
     public static LinkedList<ArrayList<Integer>> generateSolution(AdaptedGraph graph,LinkedList<ArrayList<Integer>> vertexList, float p){
 
-        LinkedList<ArrayList<Integer>> carrosCompartidos = new LinkedList<>();
+        LinkedList<ArrayList<Integer>> sharedCars = new LinkedList<>();
 
         boolean[] visited = new boolean[vertexList.size()];
         int pathCost = 0;
 
-        while(vertexList.get(0).size() > 1){ // Lista de vertices que lleagn a la empresa ordenandos de menor a major.
+        while(vertexList.get(0).size() > 1){ // List of vertices that arrive at the company ordered from lowest to highest.
 
-            int major = vertexList.get(0).get(vertexList.get(0).size() - 1); // Vértice mas alejado de la empresa.
-
-             /**
-              * Agrega la lista del posible vehiculo compartido con otros vertices partiendo del vertice más lejos de la empresa
-              */
-             carrosCompartidos.add(sharedPath(graph, major, visited, vertexList, pathCost, p));
+            int major = vertexList.get(0).get(vertexList.get(0).size() - 1); // Vertex farthest from the company.
 
              /**
-              * Elimina los vertices que fueron utilizados en el vehiculo anterior de la lista vertexList con el finalidad de disminur el ciclo.
+              * Add the list of possible vehicle shared with other vertices starting from the vertex farthest from the company.
               */
-             for (int i = 0; i < carrosCompartidos.get(carrosCompartidos.size() - 1).size(); i++)
-                 vertexList.get(0).remove(vertexList.get(0).indexOf(carrosCompartidos.get(carrosCompartidos.size() - 1).get(i)));
+             sharedCars.add(sharedPath(graph, major, visited, vertexList, pathCost, p));
+
+             /**
+              * Remove the vertices that were used in the previous vehicle from the vertexList list in order to decrease the cycle.
+              */
+             for (int i = 0; i < sharedCars.get(sharedCars.size() - 1).size(); i++)
+                 vertexList.get(0).remove(vertexList.get(0).indexOf(sharedCars.get(sharedCars.size() - 1).get(i)));
 
         }
 
-        return carrosCompartidos;
+        return sharedCars;
     }
 
     /**
-     * Método que agrupa los vértices que poseen el menor costo hacia otros vértices hasta que legue al tope maximo(5)
-     * o hasta que llegue a la univerisada sin contemplar el carro.
+     * Method that groups the vertices that have the lowest cost to 
+     * other vertices until it reaches the maximum limit (5) or until
+     * it reaches the universe without looking at the car.
      *
-     * @param graph graph completo con la distancia mas corta entre todos los vertices.
-     * @param major Vértice mas alejado de la empresa.
-     * @param visited Arreglo de booleanos(true-> si ya fue visitado o false-> si no ha sido visitado).
-     * @param vertexList Lista de ArrayList en los cual contienen cada uno de sus arcos ordenados de menor a major.
+     * @param graph complete graph with the shortest distance between all the vertices.
+     * @param major Vertex farthest from the company..
+     * @param visited Boolean fix (true-> if it was already visited or false-> if it has not been visited).
+     * @param vertexList List of ArrayList in which they contain each of their arcs ordered from minor to major.
      * @param pathCost
-     * @return Una lista de vertices
+     * @return A list of vertices.
      */
     public static ArrayList<Integer> sharedPath(AdaptedGraph graph, int major, boolean[] visited, LinkedList<ArrayList<Integer>> vertexList, int pathCost, float p){
 
@@ -225,29 +224,25 @@ public class FastPath {
                 pathCost += pathToMajor;
                 major_origen = graph.getWeight(0, vertexList.get(major).get(pos)) + pathToMajor;
 
-                if(major != vertexList.get(major).get(pos) && // para que no se vaya a si mismo
-                        pathCost <= ownerPath && //para que no se pase del tiempo maximo del primer vertice
-                        !visited[vertexList.get(major).get(pos)] && //para que no vuelva a vertices ya seleccionados
-                        0 != vertexList.get(major).get(pos) && //para que no anote que puede llegar a la  universidad
+                if(major != vertexList.get(major).get(pos) && // so you do not go to yourself
+                        pathCost <= ownerPath && // so that it does not exceed the maximum time of the first vertex.
+                        !visited[vertexList.get(major).get(pos)] && // so that it does not return to previously selected vertices.
+                        0 != vertexList.get(major).get(pos) && // so you do not write down that you can get to the university.
                         major_origen <= minorOrigin) {
 
                     path.add(major);
                     visited[major] = true;
-                    i = 0; // reiniciar el ciclo.
+                    i = 0; // restart the cycle.
 
                     major = vertexList.get(major).get(pos);
                     pathWithMajor = closingTime(graph, major, p);
                     minorOrigin = Math.min(minorOrigin - graph.getWeight(major, vertexList.get(major).get(pos)), pathWithMajor);
 
-                    pos = 1; //reiniciar la busqueda desde el menor.
+                    pos = 1; // Restart the search from the minor.
 
                 } else {
-
                     pathCost -= graph.getWeight(major,vertexList.get(major).get(pos++));
-                    // pos++;
-
                 }
-
             }
 
         }
@@ -265,52 +260,52 @@ public class FastPath {
     }
 
     /**
-     * Metodo para escribir un archivo con la respuesta
-     * Complejidad: Mejor y peor caso es O(n), donde n son los duenos de vehiculo y la empresa
+     * Method to write a file with the answer.
+     * Complexity: Better and worst case is O (n), where n are the owners of the vehicle and the company.
      *
-     * @param  permutations es una lista de listas con la permutacion para cada subconjunto de la particion de duenos de vehiculo
+     * @param  permutations is a list of lists with the permutation for each subset of the vehicle owners' partition.
      */
     public static void generateFile(LinkedList<ArrayList<Integer>> permutations,int pointsNumber, float p){
 
         try {
 
-            PrintWriter escritor = new PrintWriter(
+            PrintWriter writer = new PrintWriter(
                     "respuesta-ejemplo-U=" + pointsNumber + "-p=" + p + ".txt",
                     "UTF-8");
 
             for (ArrayList<Integer> permutation : permutations) {
 
                 for (Integer vehicleOwner : permutation)
-                    escritor.print((vehicleOwner + 1) + " ");
+                    writer.print((vehicleOwner + 1) + " ");
 
-                escritor.println();
+                writer.println();
 
             }
 
-            escritor.close();
+            writer.close();
 
         } catch(IOException ioe) {
-            System.out.println("Error escribiendo el archivo de salida " + ioe.getMessage() );
+            System.out.println("Error writing the output file " + ioe.getMessage() );
         }
 
     }
 
     public static void main(String[] args) {
 
-        System.out.println("[ALGORITMO] Iniciando FastPath...");
-        System.out.println("[ALGORITMO] Iniciando lecutra de argumentos...");
+        System.out.println("[ALGORITHM] Starting FastPath...");
+        System.out.println("[ALGORITHM] Starting reading arguments...");
 
-        //Recibir el numero de duenos de vehiculo y la empresa, y el valor de p por el main
-        int pointsNumber = args.length == 0 ? 205 : Integer.parseInt(args[0]); //205
+        // Receive the number of vehicle owners and the company, and the value of p for the main.
+        int pointsNumber = args.length == 0 ? 205 : Integer.parseInt(args[0]); // 205
         float latencyTime = args.length < 2 ? 1.3f : Float.parseFloat(args[1]);
 
         SELECTOR : if(args.length == 0) {
 
-            Object[] option = { "Si", "No" };
+            Object[] option = { "Yes", "No" };
 
             int selection = JOptionPane.showOptionDialog(null,
-                    "¿Quieres introducir la cantidad de nodos y el porcentaje de latencia?",
-                    "Escoje una opción:",
+                    "Do you want to enter the number of nodes and the percentage of latency?",
+                    "Choose an option:",
                     JOptionPane.DEFAULT_OPTION,
                     JOptionPane.QUESTION_MESSAGE,
                     null,
@@ -324,17 +319,17 @@ public class FastPath {
 
                 JPanel myPanel = new JPanel();
 
-                myPanel.add(new JLabel("Cantidad de Nodos (U):"));
+                myPanel.add(new JLabel("Number of Nodes (U):"));
                 myPanel.add(uField);
                 myPanel.add(Box.createHorizontalStrut(15));
 
-                myPanel.add(new JLabel("Porcentaje de Latencia (p):"));
+                myPanel.add(new JLabel("Latency Percentage (p):"));
                 myPanel.add(pField);
 
                 int result = JOptionPane.showConfirmDialog(
                         null,
                         myPanel,
-                        "Por favor seleccione los atributos del data-set",
+                        "Please select the data-set attributes",
                         JOptionPane.OK_CANCEL_OPTION);
 
                 if (result == JOptionPane.OK_OPTION) {
@@ -342,8 +337,8 @@ public class FastPath {
                     pointsNumber = Integer.parseInt(uField.getText());
                     latencyTime = Float.parseFloat(pField.getText());
 
-                    System.out.println("[ALGORITMO] La latencia maxima ha sido definida a: " + latencyTime);
-                    System.out.println("[ALGORITMO] La cantidad de vertices han sido definidos a: " + pointsNumber);
+                    System.out.println("[ALGORITHM] The maximum latency has been defined to: " + latencyTime);
+                    System.out.println("[ALGORITHM] The number of vertices has been defined to: " + pointsNumber);
 
                 }
 
@@ -351,33 +346,30 @@ public class FastPath {
 
         }
 
-        System.out.println("[ALGORITMO] Leyendo archivo...");
+        System.out.println("[ALGORITHM] Reading file...");
 
-        // Leer el archivo con las distancias entre los duenos de los vehiculo y la empresa
+        // Read the file with the distances between the owners of the vehicle and the company.
         AdaptedGraph graph = readFile(pointsNumber, latencyTime);
         LinkedList<ArrayList<Integer>> vertexList = new LinkedList<>();
 
-        //long startTime = System.currentTimeMillis();
+        // long startTime = System.currentTimeMillis();
         for (int i = 0; i < graph.size; i++){
-
             ArrayList<Integer> succesors = graph.getSuccessors(i);
             sort(succesors, graph, i);
             vertexList.add(succesors);
-
         }
 
-        // Asignar los vehiculos compartidos
+        // Assign shared vehicles.
         long startTime = System.currentTimeMillis();
-        LinkedList<ArrayList<Integer>> permutations = generateSolution(graph, vertexList, latencyTime); // Iniciar algoritmo
+        LinkedList<ArrayList<Integer>> permutations = generateSolution(graph, vertexList, latencyTime); // Iniciar ALGORITHM
 
         long estimatedTime = System.currentTimeMillis() - startTime;
-        System.out.println("[ALGORITMO] El algoritmo tomo un tiempo de: " + estimatedTime + "ms");
+        System.out.println("[ALGORITHM] El ALGORITHM tomo un tiempo de: " + estimatedTime + "ms");
 
-        // Imrpimir memoria total consumida.
-        System.out.println("[ALGORITMO] Memoria total consumida: " + (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / 1000000);
+        // Print total memory consumed.
+        System.out.println("[ALGORITHM] Memoria total consumida: " + (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / 1000000);
 
-        // Generar archivo de respuesta.
+        // Generate answer file.
         generateFile(permutations, pointsNumber, latencyTime);
-
     }
 }
