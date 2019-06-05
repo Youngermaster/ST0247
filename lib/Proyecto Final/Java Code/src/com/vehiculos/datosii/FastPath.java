@@ -361,7 +361,7 @@ public class FastPath {
 
         // Assign shared vehicles.
         long startTime = System.currentTimeMillis();
-        LinkedList<ArrayList<Integer>> permutations = generateSolution(graph, vertexList, latencyTime); // Iniciar ALGORITHM
+        LinkedList<ArrayList<Integer>> permutations = generateSolution(graph, vertexList, latencyTime); // Start ALGORITHM.
 
         long estimatedTime = System.currentTimeMillis() - startTime;
         System.out.println("[ALGORITHM] El ALGORITHM tomo un tiempo de: " + estimatedTime + "ms");
